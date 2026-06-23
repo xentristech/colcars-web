@@ -1,0 +1,86 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.page-header h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.header-actions .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 10px 20px;
+}
+
+.cufe-short {
+    font-family: monospace;
+    font-size: 12px;
+    cursor: help;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.badge {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn-group-sm .btn {
+    margin: 0 2px;
+}
+
+#totalPreview {
+    background: #e8f4f8;
+    border-left: 4px solid #17a2b8;
+    font-size: 14px;
+}
+
+/* Invoice PDF styling */
+@media print {
+    .dashboard-container .sidebar,
+    .top-bar,
+    .btn,
+    .modal,
+    .page-header .header-actions {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+        padding: 20px !important;
+    }
+    
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .page-header h1 {
+        margin-bottom: 15px;
+    }
+    
+    .table-responsive {
+        font-size: 12px;
+    }
+    
+    .btn-group-sm .btn {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.7rem;
+    }
+}

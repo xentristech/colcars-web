@@ -1,0 +1,175 @@
+# Easy Car Luxury - .htaccess para colcars.com (VERSIÓN COMPLETA ADAPTADA)
+# DocumentRoot = C:/ServidorWeb/htdocs/easycarluxury
+RewriteEngine On
+#agregado linea 5 por farid correcion sitemap dinamico limpio sin codigo
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# ==========================================
+# 0. PERMITIR ACCESO DIRECTO A API Y ASSETS (NECESARIO)
+# ==========================================
+RewriteRule ^api/ - [L]
+RewriteRule ^api/v1/login\.php$ - [L]
+RewriteRule ^assets/ - [L]
+
+# Permitir acceso directo a public/api/ (NECESARIO PARA stats.php)
+RewriteRule ^public/api/ - [L]
+
+# Agrege esta linea de abajo nueva:
+RewriteRule ^public/catalog/vehicle/([0-9]+)/ public/catalog/detail.php?id=$1 [L,NC]
+
+# ==========================================
+# REDIRIGIR ARCHIVOS PHP ESPECÍFICOS DE LA RAÍZ A public/
+# ==========================================
+RewriteRule ^soporte\.php$ public/soporte.php [L]
+RewriteRule ^register\.php$ public/register.php [L]
+
+# ==========================================
+# 1. EVITAR BUCLES INFINITOS
+# ==========================================
+# Si la petición ya es a public/ o assets/, no hacer nada
+RewriteRule ^public/ - [L]
+RewriteRule ^assets/ - [L]
+
+# ==========================================
+# 2. SI EL ARCHIVO EXISTE FÍSICAMENTE, SERVIRLO DIRECTAMENTE
+# ==========================================
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule .? - [L]
+
+# ==========================================
+# 2.5 EXCLUIR ARCHIVOS ESPECÍFICOS DE ADMIN
+# ==========================================
+# Excluir archivos de publicaciones y publicidad del rewrite
+RewriteRule ^dashboard/admin/new-publication\.php$ - [L]
+RewriteRule ^dashboard/admin/delete-publication\.php$ - [L]
+RewriteRule ^dashboard/admin/delete-publicidad\.php$ - [L]
+
+# Excluir también otros archivos PHP en admin (por si acaso)
+RewriteCond %{REQUEST_URI} ^/dashboard/admin/.*\.php$
+RewriteRule .? - [L]
+
+# ==========================================
+# 2.6 PERMITIR ACCESO DIRECTO A stats.php (API de estadísticas)
+# ==========================================
+RewriteRule ^api/v1/stats\.php$ - [L]
+
+# ==========================================
+# 3. MANEJAR ASSETS (debe ir ANTES que las rutas)
+# ==========================================
+
+# Capturar /assets/...
+RewriteRule ^assets/(.*)$ assets/$1 [L,NC]
+
+# Capturar /css/...
+RewriteRule ^css/(.*)$ assets/css/$1 [L,NC]
+
+# Capturar /js/...
+RewriteRule ^js/(.*)$ assets/js/$1 [L,NC]
+
+# Capturar /imagenes/...
+RewriteRule ^imagenes/(.*)$ assets/imagenes/$1 [L,NC]
+
+# Capturar /libs/...
+RewriteRule ^libs/(.*)$ assets/libs/$1 [L,NC]
+
+# ==========================================
+# 4. RUTAS DE VEHÍCULOS (SIN /catalog EN LA URL)
+# ==========================================
+# Esta regla captura /vehicle/123/titulo-del-vehiculo (URL AMIGABLE)
+RewriteCond %{REQUEST_URI} ^/vehicle/
+RewriteRule ^vehicle/([0-9]+)/?([a-zA-Z0-9\-]*)?$ public/catalog/detail.php?id=$1 [L,QSA]
+
+# También capturar /vehicle/123 (sin título)
+RewriteCond %{REQUEST_URI} ^/vehicle/
+RewriteRule ^vehicle/([0-9]+)$ public/catalog/detail.php?id=$1 [L,QSA]
+
+# ==========================================
+# REGLA CORREGIDA PARA VEHÍCULOS (SIN BUCLE)
+# ==========================================
+# Solo aplicar a URLs que NO son archivos reales
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^public/catalog/vehicle/([0-9]+)/ public/catalog/detail.php?id=$1 [L]
+
+# También para /vehicle/ directamente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^vehicle/([0-9]+)/ public/catalog/detail.php?id=$1 [L]
+
+# ==========================================
+# 5. RUTA DE DETALLE DEL VEHÍCULO (CON /catalog EN LA URL - PARA COMPATIBILIDAD)
+# ==========================================
+# Capturar /catalog/vehicle/123/...
+#RewriteRule ^catalog/vehicle/([0-9]+)/([a-zA-Z0-9\-]*)$ public/catalog/detail.php?id=$1 [L]
+
+# ==========================================
+# PERMITIR ACCESO DIRECTO A PHP EN PUBLIC
+# ==========================================
+RewriteRule ^public/login\.php$ public/login.php [L]
+RewriteRule ^public/register\.php$ public/register.php [L]
+RewriteRule ^public/forgot-password\.php$ public/forgot-password.php [L]
+RewriteRule ^public/reset-password\.php$ public/reset-password.php [L]
+RewriteRule ^public/soporte\.php$ public/soporte.php [L]
+RewriteRule ^public/contacto\.php$ public/contacto.php [L]
+RewriteRule ^public/error\.php$ public/error.php [L]
+
+# ==========================================
+# 6. RUTAS DE LA APLICACIÓN
+# ==========================================
+
+# Página principal
+RewriteRule ^$ public/index.php [L]
+
+# Autenticación
+RewriteRule ^login$ public/login.php [L]
+RewriteRule ^register$ public/register.php [L]
+
+# ==========================================
+# LOGOUT - Redirige al logout del dashboard user
+# ==========================================
+RewriteRule ^logout$ dashboard/user/logout.php [L]
+RewriteRule ^logout/$ dashboard/user/logout.php [L]
+
+# Contacto
+RewriteRule ^contacto$ public/contacto.php [L]
+
+# Catálogo principal
+RewriteRule ^catalog$ public/catalog/index.php [L]
+
+# Categorías
+RewriteRule ^catalog/category/([0-9]+)$ public/catalog/category.php?id=$1 [L]
+
+# Dashboard
+RewriteRule ^dashboard$ dashboard/user/index.php [L]
+RewriteRule ^dashboard/user$ dashboard/user/index.php [L]
+RewriteRule ^dashboard/user/([a-zA-Z0-9\-]+)$ dashboard/user/$1.php [L]
+
+RewriteRule ^dashboard/admin$ dashboard/admin/index.php [L]
+RewriteRule ^dashboard/admin/([a-zA-Z0-9\-]+)$ dashboard/admin/$1.php [L]
+
+# Logout específico del dashboard user (por si se llama directamente)
+RewriteRule ^dashboard/user/logout$ dashboard/user/logout.php [L]
+
+# ==========================================
+# API - CORREGIDO (sin .php adicional y sin bucle)
+# ==========================================
+# Solo aplicar a URLs que NO son archivos reales
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !/api/v1/stats\.php$
+RewriteCond %{REQUEST_URI} !/api/v1/login\.php$
+RewriteRule ^api/v1/([a-zA-Z0-9\-_]+)/?$ api/v1/$1.php [L,QSA]
+
+# ==========================================
+# 8. SEGURIDAD
+# ==========================================
+Options -Indexes
+
+# Proteger archivos sensibles
+<FilesMatch "\.(env|ini|log|sql|sql\.gz|htaccess)$">
+    Require all denied
+</FilesMatch>
+
+# Error pages
+ErrorDocument 404 /public/error.php?code=404
+ErrorDocument 500 /public/error.php?code=500

@@ -1,0 +1,75 @@
+/**
+ * dark-theme.css - Tema Oscuro para Easy Car Luxury
+ * No modifica banner (carrusel) ni footer
+ */
+
+/* Modo Oscuro - Solo para secciones internas */
+body.dark-theme {
+    background-color: #0f0f1a;
+}
+
+/* Navbar */
+body.dark-theme .navbar {
+    background-color: #1a1a2e !important;
+}
+
+body.dark-theme .navbar-brand,
+body.dark-theme .nav-link {
+    color: #ffffff !important;
+}
+
+/* Tarjetas de vehículos */
+body.dark-theme .vehicle-card {
+    background-color: #2c2c3e;
+}
+
+body.dark-theme .vehicle-card h3 {
+    color: #ffffff;
+}
+
+body.dark-theme .vehicle-card .vehicle-meta,
+body.dark-theme .vehicle-card .vehicle-seller {
+    color: #b0b0b0;
+}
+
+/* Secciones internas */
+body.dark-theme .featured-section,
+body.dark-theme .recent-section,
+body.dark-theme .features-section,
+body.dark-theme .plans-section,
+body.dark-theme .contact-section {
+    background-color: #1a1a2e;
+}
+
+body.dark-theme .section-header h2 {
+    color: #ffffff;
+}
+
+body.dark-theme .section-header p {
+    color: #b0b0b0;
+}
+
+/* Planes de membresía */
+body.dark-theme .plan-card {
+    background-color: #2c2c3e;
+}
+
+body.dark-theme .plan-card .plan-name {
+    color: #ffffff;
+}
+
+body.dark-theme .plan-card .plan-features li {
+    color: #b0b0b0;
+    border-bottom-color: rgba(255,255,255,0.1);
+}
+
+/* Dashboard */
+body.dark-theme .dashboard-container,
+body.dark-theme .admin-panel,
+body.dark-theme .card {
+    background-color: #1a1a2e;
+    color: #ffffff;
+}
+
+/* EL BANNER (CARRUSEL) NO SE MODIFICA - Mantiene sus colores originales */
+/* EL FOOTER NO SE MODIFICA - Mantiene sus colores originales */

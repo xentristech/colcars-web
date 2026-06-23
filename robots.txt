@@ -1,0 +1,46 @@
+# ColCars - robots.txt
+# Public crawl rules for search engines
+
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /uploads/vehicles/
+Allow: /imagenes/
+Allow: /css/
+Allow: /js/
+Allow: /libs/
+
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /cron/
+Disallow: /vendor/
+Disallow: /node_modules/
+Disallow: /backups/
+Disallow: /logs/
+Disallow: /cache/
+Disallow: /sql/
+Disallow: /scripts/
+Disallow: /docs/
+
+Disallow: /login
+Disallow: /register
+Disallow: /logout
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /soporte
+
+Disallow: /uploads/temp/
+Disallow: /uploads/documents/
+Disallow: /uploads/invoices/
+Disallow: /uploads/support_tickets/
+Disallow: /uploads/user_documents/
+
+Disallow: /*?*sort=
+Disallow: /*?*order=
+Disallow: /*?*search=
+Disallow: /*?*q=
+
+Sitemap: https://www.colcars.com/sitemap.xml

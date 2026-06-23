@@ -1,0 +1,27 @@
+.env
+.env.*
+!.env.example
+Desktop.ini
+
+backups/
+logs/
+cache/
+sql/
+uploads/
+vendor/
+node_modules/
+
+*.sql
+*.log
+*.bak
+*.tmp
+
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+debug_*.php
+info.php
+usuarios y contraseñas.txt
+EOF
