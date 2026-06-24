@@ -475,9 +475,9 @@ $categories = $pdo->query("SELECT * FROM categorias WHERE activo = 1 ORDER BY no
                 <div class="col-md-3">
                     <h5>Legal</h5>
                     <ul>
-                        <li><a href="#">Términos y condiciones</a></li>
-                        <li><a href="#">Política de privacidad</a></li>
-                        <li><a href="#">Política de cookies</a></li>
+                        <li><a href="/terminos-condiciones">Términos y condiciones</a></li>
+                        <li><a href="/politica-privacidad">Política de privacidad</a></li>
+                        <li><a href="/politica-cookies">Política de cookies</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">

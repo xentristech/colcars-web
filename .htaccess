@@ -1,8 +1,19 @@
 # Easy Car Luxury - .htaccess para colcars.com (VERSIÓN COMPLETA ADAPTADA)
 # DocumentRoot = C:/ServidorWeb/htdocs/easycarluxury
 RewriteEngine On
-#agregado linea 5 por farid correcion sitemap dinamico limpio sin codigo
+#agregado linea 5 por farid correcion sitemap dinamico limpio sin codigo paginas legales
 RewriteRule ^sitemap\.xml$ sitemap.php [L]
+# ============================================
+# Páginas legales
+# ============================================
+RewriteRule ^terminos-condiciones$ public/terminos-condiciones.php [L]
+RewriteRule ^terminos-condiciones/$ public/terminos-condiciones.php [L]
+RewriteRule ^politica-privacidad$ public/politica-privacidad.php [L]
+RewriteRule ^politica-privacidad/$ public/politica-privacidad.php [L]
+RewriteRule ^politica-cookies$ public/politica-cookies.php [L]
+RewriteRule ^politica-cookies/$ public/politica-cookies.php [L]
+
+
 
 # ==========================================
 # 0. PERMITIR ACCESO DIRECTO A API Y ASSETS (NECESARIO)
